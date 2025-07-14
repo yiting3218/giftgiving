@@ -1,16 +1,16 @@
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f8fb;
+    background: #f7faff;
     margin: 0;
 }
 
 .container {
-    max-width: 480px;
+    max-width: 500px;
     margin: 60px auto;
     background: #fff;
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 0 2px 12px #0002;
-    padding: 36px 28px 32px 28px;
+    padding: 38px 30px 34px 30px;
 }
 
 h1 {
@@ -42,7 +42,7 @@ h2 {
     padding: 10px 24px;
     border: none;
     border-radius: 8px;
-    background: #2563eb;
+    background: linear-gradient(90deg, #2563eb 60%, #e573b7 100%);
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
@@ -52,7 +52,7 @@ h2 {
 }
 
 .btn:hover, .btn:focus {
-    background: #1d4fd7;
+    background: linear-gradient(90deg, #1d4fd7 60%, #e573b7 100%);
     box-shadow: 0 2px 8px #2563eb33;
 }
 
@@ -75,13 +75,14 @@ form textarea {
     width: 100%;
     padding: 10px 12px;
     margin-top: 4px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     border: 1.5px solid #cbd5e1;
     border-radius: 7px;
     background: #f8fafc;
     font-size: 1rem;
     transition: border 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
+    line-height: 1.6;
 }
 
 form input[readonly] {
@@ -111,7 +112,7 @@ form button[type="submit"] {
     margin-bottom: 0;
     padding: 12px 0;
     border-radius: 8px;
-    background: #2563eb;
+    background: linear-gradient(90deg, #2563eb 60%, #e573b7 100%);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -121,7 +122,7 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover,
 form button[type="submit"]:focus {
-    background: #1d4fd7;
+    background: linear-gradient(90deg, #1d4fd7 60%, #e573b7 100%);
     box-shadow: 0 2px 8px #2563eb33;
 }
 

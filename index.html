@@ -11,54 +11,12 @@
         <h1>歡迎使用送禮紀錄系統</h1>
         <p class="desc">輕鬆管理你的送禮、收禮與回禮提醒，讓人情往來一目了然。</p>
         <div class="nav">
-            <a href="#gifts" class="btn">送禮紀錄</a>
-            <a href="#reminders" class="btn">回禮提醒</a>
+            <a href="record.html" class="btn">送禮紀錄</a>
+            <a href="reminder.html" class="btn">回禮提醒</a>
+            <a href="login.html" class="btn">登入</a>
+            <a href="register.html" class="btn">註冊</a>
         </div>
-        <div>
-            <a href="#login" class="btn">登入</a>
-            <a href="#register" class="btn">註冊</a>
-        </div>
-
-        <hr style="margin:32px 0;">
-        <h2>新增送禮紀錄</h2>
-        <form id="giftForm">
-            <div style="margin-bottom:12px;">
-                <label for="sender">送禮人：</label><br>
-                <input type="text" id="sender" name="sender" value="目前登入使用者" readonly style="width:100%;background:#eee;">
-            </div>
-            <div style="margin-bottom:12px;">
-                <label for="receiver">收禮人：</label><br>
-                <input type="text" id="receiver" name="receiver" required style="width:100%;">
-            </div>
-            <div style="margin-bottom:12px;">
-                <label for="gift">禮物內容：</label><br>
-                <input type="text" id="gift" name="gift" required style="width:100%;">
-            </div>
-            <div style="margin-bottom:12px;">
-                <label for="amount">金額：</label><br>
-                <input type="number" id="amount" name="amount" min="0" step="1" required style="width:100%;">
-            </div>
-            <div style="margin-bottom:12px;">
-                <label for="date">送禮日期：</label><br>
-                <input type="date" id="date" name="date" required style="width:100%;">
-            </div>
-            <div style="margin-bottom:12px;">
-                <label for="category">類別標籤：</label><br>
-                <select id="category" name="category" required style="width:100%;">
-                    <option value="">請選擇</option>
-                    <option value="生日">生日</option>
-                    <option value="畢業">畢業</option>
-                    <option value="節日">節日</option>
-                    <option value="感謝">感謝</option>
-                    <option value="其他">其他</option>
-                </select>
-            </div>
-            <div style="margin-bottom:16px;">
-                <label for="note">備註：</label><br>
-                <textarea id="note" name="note" rows="3" style="width:100%;resize:vertical;"></textarea>
-            </div>
-            <button type="submit" class="btn" style="width:100%;font-size:1.1rem;">送出</button>
-        </form>
     </div>
 </body>
+    <script src="index.js"></script>
 </html>
