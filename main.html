@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主頁 - 送禮紀錄系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">送禮紀錄系統</a>
+            <div class="nav-links">
+                <a href="gift-form.html" class="nav-link">送禮紀錄</a>
+                <a href="receive-form.html" class="nav-link">收禮紀錄</a>
+                <a href="record.html" class="nav-link">查詢紀錄</a>
+                <a href="report.html" class="nav-link">統計報表</a>
+                <a href="add-friend.html" class="nav-link">好友管理</a>
+                <a href="login.html" class="nav-link" id="logoutBtn">登出</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>歡迎回來！</h1>
+        <p class="desc" style="text-align:center;">請使用上方選單進行操作</p>
+    </div>
+    <script>
+    document.getElementById('logoutBtn').onclick = function(e) {
+        e.preventDefault();
+        window.location.href = 'login.html';
+    };
+    document.getElementById('logoutBtn2').onclick = function(e) {
+        e.preventDefault();
+        window.location.href = 'login.html';
+    };
+    </script>
+</body>
+</html>

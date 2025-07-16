@@ -1,26 +1,98 @@
+/* 導航欄 modern style */
+.navbar {
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 8px #eaf3fb;
+    padding: 0;
+    margin-bottom: 32px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    height: 56px;
+}
+.nav-logo {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #357ABD;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+.nav-links {
+    display: flex;
+    gap: 18px;
+}
+.nav-link {
+    color: #357ABD;
+    text-decoration: none;
+    font-size: 1.08rem;
+    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: 6px;
+    transition: background 0.18s, color 0.18s;
+}
+.nav-link:hover, .nav-link.active {
+    background: #eaf3fb;
+    color: #174e8a;
+}
+
+/* 表格區域美化 */
+.table-area {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px #e0e4ef;
+    padding: 24px 10px 18px 10px;
+    margin-top: 18px;
+}
+
+@media (max-width: 600px) {
+    .nav-container {
+        padding: 0 8px;
+        height: 48px;
+    }
+    .nav-logo {
+        font-size: 1.05rem;
+    }
+    .nav-link {
+        font-size: 0.98rem;
+        padding: 4px 8px;
+    }
+    .table-area {
+        padding: 8px 2px 8px 2px;
+    }
+}
 body {
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f7faff;
+    background: #f4f4f9;
     margin: 0;
-}
+    background: linear-gradient(135deg, #eaf3fb 0%, #f4f4f9 100%);
 
 .container {
     max-width: 500px;
-    margin: 60px auto;
+    margin: 48px auto;
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 2px 12px #0002;
-    padding: 38px 30px 34px 30px;
+    box-shadow: 0 2px 12px #e0e4ef;
+    border-radius: 20px;
 }
-
+    padding: 40px 24px 36px 24px;
 h1 {
-    color: #2563eb;
+    color: #4A90E2;
     margin-bottom: 10px;
-    letter-spacing: 1px;
-}
+    color: #357ABD;
+    margin-bottom: 24px;
 
+    font-size: 2.2rem;
+    font-weight: 700;
 h2 {
-    color: #2563eb;
+    color: #4A90E2;
     margin-top: 36px;
     margin-bottom: 18px;
     font-size: 1.3rem;
@@ -31,9 +103,13 @@ h2 {
     margin-bottom: 28px;
     font-size: 1.05rem;
 }
-
+    font-size: 1.1rem;
 .nav {
     margin: 24px 0 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
 }
 
 .btn {
@@ -42,17 +118,17 @@ h2 {
     padding: 10px 24px;
     border: none;
     border-radius: 8px;
-    background: linear-gradient(90deg, #2563eb 60%, #e573b7 100%);
+    background: #4A90E2;
     color: #fff;
     font-size: 1rem;
-    cursor: pointer;
+    background: #6cb6f8;
     text-decoration: none;
     transition: background 0.2s, box-shadow 0.2s;
     box-shadow: 0 1px 4px #2563eb22;
 }
 
-.btn:hover, .btn:focus {
-    background: linear-gradient(90deg, #1d4fd7 60%, #e573b7 100%);
+    box-shadow: 0 2px 8px #b6d2f8;
+    background: #357ABD;
     box-shadow: 0 2px 8px #2563eb33;
 }
 
@@ -75,12 +151,12 @@ form textarea {
     width: 100%;
     padding: 10px 12px;
     margin-top: 4px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     border: 1.5px solid #cbd5e1;
     border-radius: 7px;
     background: #f8fafc;
     font-size: 1rem;
-    transition: border 0.2s, box-shadow 0.2s;
+    border-radius: 10px;
     box-sizing: border-box;
     line-height: 1.6;
 }
@@ -93,10 +169,10 @@ form input[readonly] {
 form input:focus,
 form select:focus,
 form textarea:focus {
-    border: 1.5px solid #2563eb;
+    border: 1.5px solid #4A90E2;
     outline: none;
     background: #fff;
-    box-shadow: 0 0 0 2px #2563eb22;
+    box-shadow: 0 0 0 2px #4A90E222;
 }
 
 form textarea {
@@ -112,17 +188,17 @@ form button[type="submit"] {
     margin-bottom: 0;
     padding: 12px 0;
     border-radius: 8px;
-    background: linear-gradient(90deg, #2563eb 60%, #e573b7 100%);
+    background: #4A90E2;
     color: #fff;
     border: none;
-    cursor: pointer;
+    background: #6cb6f8;
     transition: background 0.2s, box-shadow 0.2s;
     box-shadow: 0 1px 4px #2563eb22;
 }
 
-form button[type="submit"]:hover,
+    box-shadow: 0 2px 8px #b6d2f8;
 form button[type="submit"]:focus {
-    background: linear-gradient(90deg, #1d4fd7 60%, #e573b7 100%);
+    background: #357ABD;
     box-shadow: 0 2px 8px #2563eb33;
 }
 
@@ -130,4 +206,26 @@ hr {
     border: none;
     border-top: 1.5px solid #e0e7ef;
     margin: 32px 0;
+}
+
+@media (max-width: 600px) {
+    .container {
+        max-width: 98vw;
+        margin: 18px 2vw;
+        padding: 18px 4vw 18px 4vw;
+    }
+    h1, h2 {
+        font-size: 1.3rem;
+    }
+    .btn {
+        width: 100%;
+        margin: 0 0 12px 0;
+        padding: 12px 0;
+        font-size: 1.05rem;
+    }
+    form input,
+    form select,
+    form textarea {
+        font-size: 1rem;
+    }
 }

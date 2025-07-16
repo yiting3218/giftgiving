@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>註冊 - 送禮紀錄系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>註冊新帳號</h1>
+        <form id="registerForm">
+            <label for="register-username">用戶名</label>
+            <input type="text" id="register-username" name="username" required>
+            <label for="register-email">電子郵件</label>
+            <input type="email" id="register-email" name="email" required>
+            <label for="register-password">密碼</label>
+            <input type="password" id="register-password" name="password" required>
+            <button type="submit" class="btn">提交註冊</button>
+        </form>
+        <div style="text-align:center;margin-top:18px;">
+            <a href="login.html" class="btn" style="background:#e0e7ef;color:#357ABD;">返回登入頁面</a>
+        </div>
+    </div>
+    <script>
+    document.getElementById('registerForm').onsubmit = function(e) {
+        e.preventDefault();
+        window.location.href = 'login.html';
+    };
+    </script>
+</body>
+</html>

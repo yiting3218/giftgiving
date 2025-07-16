@@ -5,59 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>送禮紀錄查詢</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-        th, td { border: 1px solid #e0e7ef; padding: 10px 8px; text-align: center; }
-        th { background: #2563eb; color: #fff; }
-        tr:nth-child(even) { background: #f4f8fb; }
-    </style>
 </head>
 <body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">送禮紀錄系統</a>
+            <div class="nav-links">
+                <a href="gift-form.html" class="nav-link">送禮紀錄</a>
+                <a href="record.html" class="nav-link active">查看紀錄</a>
+                <a href="reminder.html" class="nav-link">回禮提醒</a>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <h1>送禮紀錄查詢</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>送禮人</th>
-                    <th>收禮人</th>
-                    <th>禮物內容</th>
-                    <th>金額</th>
-                    <th>日期</th>
-                    <th>類別</th>
-                    <th>備註</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>王小明</td>
-                    <td>李小華</td>
-                    <td>生日蛋糕</td>
-                    <td>500</td>
-                    <td>2025-06-01</td>
-                    <td>生日</td>
-                    <td>祝福生日快樂</td>
-                </tr>
-                <tr>
-                    <td>王小明</td>
-                    <td>陳大仁</td>
-                    <td>畢業禮物卡</td>
-                    <td>1000</td>
-                    <td>2025-06-15</td>
-                    <td>畢業</td>
-                    <td>畢業快樂</td>
-                </tr>
-                <tr>
-                    <td>王小明</td>
-                    <td>張小美</td>
-                    <td>中秋禮盒</td>
-                    <td>800</td>
-                    <td>2025-09-10</td>
-                    <td>節日</td>
-                    <td>中秋快樂</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>送禮人</th>
+                        <th>收禮人</th>
+                        <th>禮品</th>
+                        <th>金額</th>
+                        <th>日期</th>
+                        <th>類別</th>
+                        <th>備註</th>
+                    </tr>
+                </thead>
+                <tbody id="record-tbody">
+                    <!-- 無資料時保持空白，資料由 JS 動態渲染 -->
+                </tbody>
+            </table>
+        </div>
     </div>
-</body>
     <script src="record.js"></script>
+</body>
 </html>

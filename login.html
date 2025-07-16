@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入 - 送禮紀錄系統</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>登入</h1>
+        <form id="loginForm">
+            <label for="login-username">用戶名或電子郵件</label>
+            <input type="text" id="login-username" name="username" required>
+            <label for="login-password">密碼</label>
+            <input type="password" id="login-password" name="password" required>
+            <button type="submit" class="btn">登入</button>
+        </form>
+        <div style="text-align:center;margin-top:18px;">
+            <a href="register.html" class="btn" style="background:#e0e7ef;color:#357ABD;">註冊新帳號</a>
+            <br><a href="#" style="color:#357ABD;font-size:0.98rem;">忘記密碼？</a>
+        </div>
+    </div>
+    <script>
+    document.getElementById('loginForm').onsubmit = function(e) {
+        e.preventDefault();
+        // 模擬帳號密碼驗證通過
+        localStorage.setItem('isLoggedIn', '1');
+        window.location.href = 'main.html';
+    };
+    </script>
+</body>
+</html>
