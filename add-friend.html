@@ -27,9 +27,10 @@
         <section style="background:#fff;border-radius:10px;padding:24px 20px 18px 20px;box-shadow:0 2px 12px #e0e7ef;">
             <form id="addFriendForm" style="margin-bottom:20px;">
                 <label for="friendName" style="font-weight:600;">新建好友</label>
-                <div style="display:flex;gap:12px;align-items:center;margin-top:8px;">
+                <div style="display:flex;flex-direction:column;gap:10px;margin-top:8px;">
                     <input type="text" id="friendName" name="friendName" required placeholder="請輸入好友姓名" style="flex:1;">
-                    <button type="submit" class="btn">新增</button>
+                    <input type="text" id="friendBirthday" name="friendBirthday" required placeholder="請輸入生日 (YYYY/MM/DD)" style="flex:1;">
+                    <button type="submit" class="btn" style="margin-top:8px;">新增</button>
                 </div>
             </form>
             <div id="friendList" style="margin-bottom:24px;"></div>
@@ -39,6 +40,7 @@
             </div>
             <div style="text-align:center;margin-top:10px;">
                 <a href="main.html" class="btn" style="background:#e0e7ef;color:#357ABD;min-width:120px;">返回主頁</a>
+        <button class="btn" onclick="window.history.back()" style="background:#e0e7ef;color:#357ABD;min-width:120px;margin-left:8px;">返回上一頁</button>
             </div>
         </section>
     </div>
@@ -51,7 +53,7 @@
             div.innerHTML = '<p style="color:#888;text-align:center;">目前尚無好友</p>';
         } else {
             div.innerHTML = '<h2 style="font-size:1.05rem;margin-bottom:8px;">我的好友</h2><ul style="padding-left:0;list-style:none;margin:0;">'+
-                list.map((f,i)=>`<li style='margin-bottom:8px;display:flex;align-items:center;gap:10px;'><span style='flex:1;'>${f}</span> <button onclick="deleteFriend(${i})" style='background:#f8d7da;color:#b71c1c;border:none;border-radius:5px;padding:2px 12px;cursor:pointer;font-size:0.98rem;'>刪除</button></li>`).join('')+'</ul>';
+                list.map((f,i)=>`<li style='margin-bottom:8px;display:flex;align-items:center;gap:10px;'><span style='flex:1;'>${f.name} <span style='color:#888;font-size:0.98em;'>(生日：${f.birthday||'-'})</span></span> <button onclick="deleteFriend(${i})" style='background:#f8d7da;color:#b71c1c;border:none;border-radius:5px;padding:2px 12px;cursor:pointer;font-size:0.98rem;'>刪除</button></li>`).join('')+'</ul>';
         }
     }
     function deleteFriend(idx) {
@@ -63,12 +65,14 @@
     document.getElementById('addFriendForm').onsubmit = function(e) {
         e.preventDefault();
         const name = document.getElementById('friendName').value.trim();
-        if(!name) return;
+        const birthday = document.getElementById('friendBirthday').value.trim();
+        if(!name || !birthday) return;
         let list = JSON.parse(localStorage.getItem('friends')||'[]');
-        if(list.includes(name)) { alert('好友已存在！'); return; }
-        list.push(name);
+        if(list.some(f=>f.name===name)) { alert('好友已存在！'); return; }
+        list.push({name,birthday});
         localStorage.setItem('friends', JSON.stringify(list));
         document.getElementById('friendName').value = '';
+        document.getElementById('friendBirthday').value = '';
         renderFriendList();
     };
     renderFriendList();

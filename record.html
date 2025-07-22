@@ -3,41 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>送禮紀錄查詢</title>
+    <title>查詢紀錄</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="nav-logo">送禮紀錄系統</a>
-            <div class="nav-links">
-                <a href="gift-form.html" class="nav-link">送禮紀錄</a>
-                <a href="record.html" class="nav-link active">查看紀錄</a>
-                <a href="reminder.html" class="nav-link">回禮提醒</a>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="index.html">送禮紀錄系統</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="record.html">查詢</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reminder.html">提醒送禮</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
     <div class="container">
-        <h1>送禮紀錄查詢</h1>
-        <div class="table-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>送禮人</th>
-                        <th>收禮人</th>
-                        <th>禮品</th>
-                        <th>金額</th>
-                        <th>日期</th>
-                        <th>類別</th>
-                        <th>備註</th>
-                    </tr>
-                </thead>
-                <tbody id="record-tbody">
-                    <!-- 無資料時保持空白，資料由 JS 動態渲染 -->
-                </tbody>
-            </table>
+        <h1 class="mb-4 text-center fw-bold" style="letter-spacing:1px;">送禮紀錄查詢</h1>
+        <h1 class="mb-4 text-center fw-bold" style="letter-spacing:1px;">查詢紀錄</h1>
+        <div class="shadow p-4 rounded" style="background:#fff;max-width:900px;margin:auto;">
+            <form id="searchForm" class="row g-3 mb-4">
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="searchSender" placeholder="送禮人">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="searchReceiver" placeholder="收禮人">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" id="searchGift" placeholder="禮品">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" id="searchDateStart" placeholder="開始日期">
+                </div>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" id="searchDateEnd" placeholder="結束日期">
+                </div>
+                <div class="col-md-2 d-grid">
+                    <button type="submit" class="btn btn-primary">查詢</button>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>送禮人</th>
+                            <th>收禮人</th>
+                            <th>禮品</th>
+                            <th>金額</th>
+                            <th>日期</th>
+                            <th>類別</th>
+                            <th>備註</th>
+                        </tr>
+                    </thead>
+                    <tbody id="record-tbody">
+                        <!-- JS 動態渲染 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="text-align:center;margin-top:24px;">
+            <button class="btn" onclick="window.history.back()" style="background:#e0e7ef;color:#357ABD;min-width:120px;">返回上一頁</button>
         </div>
     </div>
-    <script src="record.js"></script>
+    <script>
+    // 查詢送禮紀錄（支援多條件）
+    function renderRecords(filter={}) {
+        let records = JSON.parse(localStorage.getItem('giftRecords')||'[]');
+        if(filter.sender) records = records.filter(r=>r.sender.includes(filter.sender));
+        if(filter.receiver) records = records.filter(r=>r.receiver.includes(filter.receiver));
+        if(filter.gift) records = records.filter(r=>r.gift.includes(filter.gift));
+        if(filter.dateStart) records = records.filter(r=>r.date >= filter.dateStart);
+        if(filter.dateEnd) records = records.filter(r=>r.date <= filter.dateEnd);
+        const tbody = document.getElementById('record-tbody');
+        tbody.innerHTML = records.length ? records.map(r=>`<tr><td>${r.sender}</td><td>${r.receiver}</td><td>${r.gift}</td><td>${r.amount}</td><td>${r.date}</td><td>${r.category}</td><td>${r.note||''}</td></tr>`).join('') : '<tr><td colspan="7" class="text-center text-muted">查無紀錄</td></tr>';
+    }
+    document.getElementById('searchForm').onsubmit = function(e){
+        e.preventDefault();
+        renderRecords({
+            sender: document.getElementById('searchSender').value.trim(),
+            receiver: document.getElementById('searchReceiver').value.trim(),
+            gift: document.getElementById('searchGift').value.trim(),
+            dateStart: document.getElementById('searchDateStart').value,
+            dateEnd: document.getElementById('searchDateEnd').value
+        });
+    };
+    renderRecords();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

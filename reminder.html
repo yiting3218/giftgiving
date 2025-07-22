@@ -9,8 +9,118 @@
 <body>
     <div class="container">
         <h1>回禮提醒</h1>
-        <div id="reminder-list">
+        <div class="reminder-card">
+            <h2 class="reminder-title"><i class="bi bi-bell"></i> 送禮提醒</h2>
+            <div id="calendar" style="margin-bottom:24px;"></div>
+            <ul class="reminder-list" id="reminderList"></ul>
+            <div class="no-reminder" id="noReminder" style="display:none;">近期無即將到來的好友生日</div>
+            <div class="d-flex justify-content-end mt-3">
+                <button type="button" class="btn btn-back w-50" onclick="window.history.back()">返回上一頁</button>
+            </div>
+        </div>
+        <script>
+        // 取得好友列表（含生日）
+        function getFriends() {
+            return JSON.parse(localStorage.getItem('friends')||'[]');
+        }
+        // 計算距離生日天數
+        function daysToBirthday(birthday) {
+            if(!birthday) return null;
+            const now = new Date();
+            const [year,month,day] = birthday.split('/').map(Number);
+            let next = new Date(now.getFullYear(), month-1, day);
+            if(next < now) next.setFullYear(now.getFullYear()+1);
+            const diff = Math.ceil((next-now)/86400000);
+            return diff;
+        }
+        // 日曆組件
+        function renderCalendar() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth();
+            const daysInMonth = new Date(year, month+1, 0).getDate();
+            const friends = getFriends();
+            // 生日標註
+            let birthdayMap = {};
+            friends.forEach(f=>{
+                if(f.birthday) {
+                    let [by,bm,bd] = f.birthday.split('/').map(Number);
+                    if(by && bm-1 === month) {
+                        birthdayMap[bd] = birthdayMap[bd] || [];
+                        birthdayMap[bd].push(f.name);
+                    }
+                }
+            });
+            let html = `<table class='table table-bordered text-center'><thead><tr><th colspan='7'>${year}年${month+1}月</th></tr><tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr></thead><tbody>`;
+            let d = 1;
+            let firstDay = new Date(year, month, 1).getDay();
+            for(let w=0;w<6;w++){
+                html += '<tr>';
+                for(let wd=0;wd<7;wd++){
+                    if(w===0 && wd<firstDay) {
+                        html += '<td></td>';
+                    } else if(d>daysInMonth) {
+                        html += '<td></td>';
+                    } else {
+                        let mark = '';
+                        if(birthdayMap[d]) {
+                            mark = `<div style='border-radius:50%;background:#ffb6e6;color:#fff;padding:2px 0 2px 0;margin:0 8px;'>${d}</div><div style='font-size:0.95em;color:#d81b60;'>🎂 ${birthdayMap[d].join(', ')}</div>`;
+                        } else {
+                            mark = d;
+                        }
+                        html += `<td style='cursor:pointer;' onclick='showDayReminder(${d})'>${mark}</td>`;
+                        d++;
+                    }
+                }
+                html += '</tr>';
+            }
+            html += '</tbody></table>';
+            document.getElementById('calendar').innerHTML = html;
+        }
+        // 點選日期顯示提醒
+        window.showDayReminder = function(day) {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth()+1;
+            const friends = getFriends();
+            const list = friends.filter(f=>{
+                let [by,bm,bd] = f.birthday.split('/').map(Number);
+                return by && bm===month && bd===day;
+            });
+            if(list.length) {
+                alert(list.map(f=>`${f.name} 的生日是 ${f.birthday}，記得送禮！`).join('\n'));
+            } else {
+                alert(`${month}月${day}日無好友生日。`);
+            }
+        }
+        function renderReminders() {
+            const friends = getFriends();
+            const soonList = friends.filter(f=>{
+                const d = daysToBirthday(f.birthday);
+                return d!==null && d>=0 && d<=14; // 14天內
+            }).sort((a,b)=>daysToBirthday(a.birthday)-daysToBirthday(b.birthday));
+            const ul = document.getElementById('reminderList');
+            if(soonList.length===0) {
+                ul.innerHTML = '';
+                document.getElementById('noReminder').style.display = '';
+            } else {
+                ul.innerHTML = soonList.map(f=>{
+                    const d = daysToBirthday(f.birthday);
+                    return `<li><i class=\"bi bi-gift\"></i> <span><b>${f.name}</b> 的生日將於 <b>${d} 天後</b> (${f.birthday}) 到來，記得準備禮物！</span></li>`;
+                }).join('');
+                document.getElementById('noReminder').style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function(){
+            renderCalendar();
+            renderReminders();
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <!-- 回禮提醒區塊，動態產生提醒內容 -->
+        </div>
+        <div style="text-align:center;margin-top:24px;">
+            <button class="btn" onclick="window.history.back()" style="background:#e0e7ef;color:#357ABD;min-width:120px;">返回上一頁</button>
         </div>
     </div>
     <script src="reminder.js"></script>

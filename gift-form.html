@@ -1,30 +1,131 @@
 <!DOCTYPE html>
-    <div class="container">
-        <h1>新增送禮紀錄</h1>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>送禮</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #f8eaff 0%, #e0f7fa 100%);
+            min-height: 100vh;
+        }
+        .gift-card {
+            background: #fff;
+            border-radius: 22px;
+            box-shadow: 0 4px 18px #e0e7ef;
+            padding: 32px 24px 24px 24px;
+            max-width: 440px;
+            margin: 48px auto;
+            position: relative;
+            transition: box-shadow 0.3s;
+        }
+        .gift-card:hover {
+            box-shadow: 0 8px 32px #b2b2ff;
+        }
+        .gift-icon {
+            width: 56px;
+            height: 56px;
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px #e0e7ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #357ABD;
+        }
+        .form-control, .form-select {
+            border-radius: 12px;
+            box-shadow: 0 2px 8px #e0e7ef;
+            transition: box-shadow 0.2s;
+        }
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 4px 16px #b2b2ff;
+            border-color: #357ABD;
+        }
+        .btn-gift {
+            background: linear-gradient(90deg, #6ec6ff 0%, #ffb6e6 100%);
+            color: #fff;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px #e0e7ef;
+            transition: background 0.3s, box-shadow 0.2s;
+        }
+        .btn-gift:hover {
+            background: linear-gradient(90deg, #ffb6e6 0%, #6ec6ff 100%);
+            box-shadow: 0 4px 16px #b2b2ff;
+        }
+        .btn-back {
+            background: #fff0f6;
+            color: #357ABD;
+            border-radius: 16px;
+            border: none;
+            font-weight: 600;
+            box-shadow: 0 2px 8px #e0e7ef;
+            margin-left: 8px;
+            transition: box-shadow 0.2s;
+        }
+        .btn-back:hover {
+            box-shadow: 0 4px 16px #ffb6e6;
+            background: #ffe3f3;
+        }
+        .gift-bg-lines {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .gift-bg-lines svg {
+            width: 100%; height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-bg-lines">
+        <svg viewBox="0 0 440 600" fill="none">
+            <path d="M0 100 Q220 200 440 100" stroke="#b2b2ff" stroke-width="2" opacity="0.15"/>
+            <path d="M0 300 Q220 400 440 300" stroke="#ffb6e6" stroke-width="2" opacity="0.13"/>
+            <path d="M0 500 Q220 600 440 500" stroke="#6ec6ff" stroke-width="2" opacity="0.12"/>
+        </svg>
+    </div>
+    <div class="gift-card position-relative">
+        <div class="gift-icon">
+            <img src="https://cdn-icons-png.flaticon.com/512/616/616489.png" alt="gift" style="width:38px;height:38px;">
+        </div>
+        <h2 class="mb-4 text-center fw-bold" style="letter-spacing:1px;color:#357ABD;">送禮</h2>
         <form id="giftForm">
-            <div>
-                <label for="sender">送禮人</label>
-                <input type="text" id="sender" name="sender" readonly>
+            <div class="mb-3">
+                <label for="sender" class="form-label">送禮人</label>
+                <input type="text" id="sender" name="sender" class="form-control" readonly>
             </div>
-            <div>
-                <label for="receiver">收禮人</label>
-                <input type="text" id="receiver" name="receiver" required>
+            <div class="mb-3">
+                <label for="receiver" class="form-label">收禮人</label>
+                <select id="receiver" name="receiver" class="form-select" required></select>
             </div>
-            <div>
-                <label for="gift">禮品</label>
-                <input type="text" id="gift" name="gift" required>
+            <div class="mb-3">
+                <label for="gift" class="form-label">禮品</label>
+                <input type="text" id="gift" name="gift" class="form-control" required>
             </div>
-            <div>
-                <label for="amount">金額</label>
-                <input type="number" id="amount" name="amount" min="0" step="1" required>
+            <div class="mb-3">
+                <label for="amount" class="form-label">金額</label>
+                <input type="number" id="amount" name="amount" min="0" step="1" class="form-control" required>
             </div>
-            <div>
-                <label for="date">日期</label>
-                <input type="date" id="date" name="date" required>
+            <div class="mb-3">
+                <label for="date" class="form-label">日期</label>
+                <input type="date" id="date" name="date" class="form-control" required>
             </div>
-            <div>
-                <label for="category">類別</label>
-                <select id="category" name="category" required>
+            <div class="mb-3">
+                <label for="category" class="form-label">類別</label>
+                <select id="category" name="category" class="form-select" required>
                     <option value="">請選擇</option>
                     <option value="生日">生日</option>
                     <option value="畢業">畢業</option>
@@ -33,21 +134,63 @@
                     <option value="其他">其他</option>
                 </select>
             </div>
-            <div>
-                <label for="note">備註</label>
-                <textarea id="note" name="note" rows="3"></textarea>
+            <div class="mb-3">
+                <label for="note" class="form-label">備註</label>
+                <textarea id="note" name="note" rows="3" class="form-control"></textarea>
             </div>
-            <button type="submit" class="btn">送出</button>
+            <div class="d-flex justify-content-between gap-3 mt-4">
+                <button type="submit" class="btn btn-gift w-50">送出</button>
+                <button type="button" class="btn btn-back w-50" onclick="window.history.back()">返回上一頁</button>
+            </div>
         </form>
     </div>
-    <script src="gift-form.js"></script>
-            <div>
-                <label for="note">備註：</label>
-                <textarea id="note" name="note" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn">送出</button>
-        </form>
-    </div>
+    <script>
+    // 頁面載入時自動填入送禮人（登入者名稱）與好友下拉
+    document.addEventListener('DOMContentLoaded', function() {
+        var sender = localStorage.getItem('userName') || '';
+        document.getElementById('sender').value = sender;
+        // 好友列表下拉
+        var friends = JSON.parse(localStorage.getItem('friends')||'[]');
+        var receiverSel = document.getElementById('receiver');
+        receiverSel.innerHTML = friends.length ? friends.map(f=>`<option value="${f}">${f}</option>`).join('') : '<option value="">（請先新增好友）</option>';
+    });
+    // 表單送出顯示提示
+    document.getElementById('giftForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const data = {
+            sender: document.getElementById('sender').value,
+            receiver: document.getElementById('receiver').value,
+            gift: document.getElementById('gift').value,
+            amount: document.getElementById('amount').value,
+            date: document.getElementById('date').value,
+            category: document.getElementById('category').value,
+            note: document.getElementById('note').value
+        };
+        try {
+            const res = await fetch('http://127.0.0.1:5000/api/gifts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await res.json();
+            if(res.ok) {
+                alert('送出成功！');
+                this.reset();
+            } else {
+                alert('送出失敗：' + (result.error || '未知錯誤'));
+            }
+        } catch(err) {
+            alert('送出失敗，請稍後再試。');
+        }
+    });
+    // 動態過渡效果
+    document.querySelector('.gift-card').addEventListener('mouseenter',function(){
+        this.style.boxShadow = '0 8px 32px #b2b2ff';
+    });
+    document.querySelector('.gift-card').addEventListener('mouseleave',function(){
+        this.style.boxShadow = '0 4px 18px #e0e7ef';
+    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-    <script src="gift-form.js"></script>
 </html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收禮</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body { background: linear-gradient(120deg, #e0f7fa 0%, #f8eaff 100%); min-height: 100vh; }
+        .receive-card { background: #fff; border-radius: 22px; box-shadow: 0 4px 18px #e0e7ef; padding: 32px 24px 24px 24px; max-width: 540px; margin: 48px auto; position: relative; }
+        .receive-icon { width: 56px; height: 56px; position: absolute; top: -28px; left: 50%; transform: translateX(-50%); background: #fff; border-radius: 50%; box-shadow: 0 2px 8px #e0e7ef; display: flex; align-items: center; justify-content: center; }
+        .form-label { font-weight: 600; color: #357ABD; }
+        .btn-back { background: #fff0f6; color: #357ABD; border-radius: 16px; border: none; font-weight: 600; box-shadow: 0 2px 8px #e0e7ef; margin-left: 8px; transition: box-shadow 0.2s; }
+        .btn-back:hover { box-shadow: 0 4px 16px #ffb6e6; background: #ffe3f3; }
+        .table th, .table td { vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <div class="receive-card position-relative">
+        <div class="receive-icon">
+            <i class="bi bi-box-arrow-in-down" style="font-size:2rem;color:#357ABD;"></i>
+        </div>
+        <h2 class="mb-4 text-center fw-bold" style="letter-spacing:1px;color:#357ABD;">收禮</h2>
+        <div class="mb-3">
+            <label for="filterCategory" class="form-label">類別篩選</label>
+            <select id="filterCategory" class="form-select">
+                <option value="">全部</option>
+                <option value="生日">生日</option>
+                <option value="畢業">畢業</option>
+                <option value="節日">節日</option>
+                <option value="感謝">感謝</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="filterSender" class="form-label">送禮人篩選</label>
+            <input type="text" id="filterSender" class="form-control" placeholder="輸入送禮人名稱">
+        </div>
+        <div class="table-responsive mb-3">
+            <table class="table table-bordered align-middle" id="receiveTable">
+                <thead class="table-light">
+                    <tr>
+                        <th>送禮人</th>
+                        <th>禮品</th>
+                        <th>金額</th>
+                        <th>日期</th>
+                        <th>類別</th>
+                        <th>備註</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-back w-50" onclick="window.history.back()">返回上一頁</button>
+        </div>
+    </div>
+    <script>
+    // 取得目前登入者
+    var userName = localStorage.getItem('userName') || '';
+    // 取得所有送禮紀錄
+    var records = JSON.parse(localStorage.getItem('giftRecords')||'[]');
+    // 篩選出收禮人是自己的紀錄
+    function getReceivedRecords() {
+        return records.filter(r => r.receiver === userName);
+    }
+    function renderTable() {
+        var category = document.getElementById('filterCategory').value;
+        var sender = document.getElementById('filterSender').value.trim();
+        var data = getReceivedRecords().filter(r => {
+            var matchCat = !category || r.category === category;
+            var matchSender = !sender || r.sender.includes(sender);
+            return matchCat && matchSender;
+        });
+        var tbody = document.querySelector('#receiveTable tbody');
+        tbody.innerHTML = data.length ? data.map(r=>`
+            <tr>
+                <td>${r.sender}</td>
+                <td>${r.gift}</td>
+                <td>${r.amount}</td>
+                <td>${r.date}</td>
+                <td>${r.category}</td>
+                <td>${r.note||''}</td>
+            </tr>
+        `).join('') : `<tr><td colspan="6" class="text-center text-muted">目前沒有收禮紀錄</td></tr>`;
+    }
+    document.getElementById('filterCategory').onchange = renderTable;
+    document.getElementById('filterSender').oninput = renderTable;
+    document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
